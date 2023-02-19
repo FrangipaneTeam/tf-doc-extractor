@@ -11,14 +11,15 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-func genExampleFromTest(str string) (string, string) {
+func genExampleFromTest(str, tfType string) (string, string) {
 	startDoc := regexp.MustCompile("const testAcc.*`")
 	endDoc := regexp.MustCompile("^`$")
-	tfNameRe := regexp.MustCompile(`^(?:resource|data)\s+"(\S+)"\s+.*`)
+	tfNameRe := regexp.MustCompile(`^(resource|data)\s+"(\S+)"\s+.*`)
 
 	doc := ""
 	startFound := false
 	endFound := false
+	badTfType := false
 	tfName := ""
 
 	scanner := bufio.NewScanner(strings.NewReader(str))
@@ -38,8 +39,16 @@ func genExampleFromTest(str string) (string, string) {
 
 		// check for tf name
 		if tfNameRe.MatchString(line) {
-			tfName = tfNameRe.FindStringSubmatch(line)[1]
-			log.Info().Msgf("found tf name: %s", tfName)
+			foundTfType := tfNameRe.FindStringSubmatch(line)[1]
+			if tfType != foundTfType {
+				log.Info().Msgf("tf type %s not match %s", foundTfType, tfType)
+				badTfType = true
+				continue
+			} else {
+				badTfType = false
+				tfName = tfNameRe.FindStringSubmatch(line)[2]
+				log.Info().Msgf("found tf name: %s", tfName)
+			}
 		}
 
 		// check for doc end
@@ -49,7 +58,7 @@ func genExampleFromTest(str string) (string, string) {
 			endFound = true
 			continue
 		}
-		if startFound {
+		if startFound && !badTfType {
 			doc += line + "\n"
 		}
 	}
@@ -64,8 +73,10 @@ func CreateExampleFile(fileName, exampleDir string) error {
 	}
 
 	tfType := "resource"
+	tfTest := "resource"
 	if strings.Contains(fileName, "datasource") {
 		tfType = "data-source"
+		tfTest = "data"
 	}
 
 	f, err := file.FileToString(fileName)
@@ -73,7 +84,7 @@ func CreateExampleFile(fileName, exampleDir string) error {
 		return err
 	}
 
-	doc, tfName := genExampleFromTest(f)
+	doc, tfName := genExampleFromTest(f, tfTest)
 	if doc == "" {
 		return errors.New("doc is empty")
 	}
