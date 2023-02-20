@@ -16,7 +16,7 @@ Add the go:generate directive above your Terraform import function.
 * `example-dir` is the location of the Terraform example directory
 
 ```go
-//go:generate tf-doc-extractor -filename $GOFILE -example-dir ../../../examples -resource
+//go:generate go run github.com/FrangipaneTeam/tf-doc-extractor@latest -filename $GOFILE -example-dir ../../../examples -resource
  func (r *orgUserResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
         resource.ImportStatePassthroughID(ctx, path.Root("user_name"), req, resp)
  }
@@ -32,7 +32,7 @@ terraform import cloudavenue_org_user.example user_name
 ## Generating examples from acceptance tests
 Add the go:generate directive above your Terraform example in the test file. For example, with a test file named `internal/tests/public_ip_datasource_test.go` :
 ```go
-//go:generate tf-doc-extractor -filename $GOFILE -example-dir ../../examples -test
+//go:generate go run github.com/FrangipaneTeam/tf-doc-extractor@latest -filename $GOFILE -example-dir ../../examples -test
  const testAccPublicIPDataSourceConfig = `
  data "cloudavenue_public_ip" "test" {}
  `
