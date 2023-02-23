@@ -6,11 +6,11 @@ import (
 	"strings"
 
 	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
-	"github.com/rs/zerolog/log"
 
 	"github.com/tcnksm/go-latest"
 
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/example"
+	"github.com/FrangipaneTeam/tf-doc-extractor/internal/logger"
 )
 
 //go:embed version.txt
@@ -21,26 +21,29 @@ func main() {
 	exampleDir := flag.String("example-dir", "", "example directory")
 	fromTest := flag.Bool("test", false, "from test")
 	fromResource := flag.Bool("resource", false, "from resource")
+	debug := flag.Bool("debug", false, "sets log level to debug")
 	flag.Parse()
-	// log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 
 	version = strings.Trim(version, "\n")
-	log.Info().Msgf("tf-doc-extractor version %s", version)
+
+	logger.Logger = logger.SetupZeroLog(version, *debug)
+
+	logger.Logger.Info().Msgf("tf-doc-extractor version %s", version)
 
 	if *fileName == "" {
-		log.Fatal().Msg("filename is required")
+		logger.Logger.Fatal().Msg("filename is required")
 	}
 
 	if !file.IsFileExists(*fileName) {
-		log.Fatal().Msgf("file %s not found", *fileName)
+		logger.Logger.Fatal().Msgf("file %s not found", *fileName)
 	}
 
 	if !*fromTest && !*fromResource {
-		log.Fatal().Msg("test or resource is required")
+		logger.Logger.Fatal().Msg("test or resource is required")
 	}
 
 	if *fromTest && *fromResource {
-		log.Fatal().Msg("test and resource are exclusive")
+		logger.Logger.Fatal().Msg("test and resource are exclusive")
 	}
 
 	// check version
@@ -52,22 +55,22 @@ func main() {
 	res, err := latest.Check(githubTag, version)
 	if err == nil {
 		if res.Outdated {
-			log.Warn().Msgf("new version availaible : %s", res.Current)
+			logger.Logger.Warn().Msgf("new version availaible : %s", res.Current)
 		}
 	} else {
-		log.Warn().Err(err).Msg("failed to check version")
+		logger.Logger.Warn().Err(err).Msg("failed to check version")
 	}
 
-	log.Info().Msgf("using file %s", *fileName)
+	logger.Logger.Info().Msgf("using file %s", *fileName)
 	if *fromTest {
-		err := example.CreateExampleFile(*fileName, *exampleDir)
-		if err != nil {
-			log.Fatal().Err(err).Msg("failed to create example file")
+		errCreateExample := example.CreateExampleFile(*fileName, *exampleDir)
+		if errCreateExample != nil {
+			logger.Logger.Fatal().Err(errCreateExample).Msg("failed to create example file")
 		}
 	} else if *fromResource {
-		err := example.CreateImportExampleFile(*fileName, *exampleDir)
-		if err != nil {
-			log.Fatal().Err(err).Msg("failed to create example file")
+		errCreateImport := example.CreateImportExampleFile(*fileName, *exampleDir)
+		if errCreateImport != nil {
+			logger.Logger.Fatal().Err(errCreateImport).Msg("failed to create example file")
 		}
 	}
 }
