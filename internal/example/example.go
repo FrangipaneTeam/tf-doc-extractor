@@ -8,7 +8,8 @@ import (
 	"strings"
 
 	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
-	"github.com/rs/zerolog/log"
+
+	"github.com/FrangipaneTeam/tf-doc-extractor/internal/logger"
 )
 
 func genExampleFromTest(str, tfType string) (string, string) {
@@ -29,7 +30,7 @@ func genExampleFromTest(str, tfType string) (string, string) {
 
 		// check for doc start
 		if startDoc.MatchString(line) {
-			log.Info().Msgf("found start doc: %s", line)
+			logger.Logger.Info().Msgf("found start doc: %s", line)
 			startFound = true
 			if endFound {
 				doc += "\n"
@@ -42,25 +43,25 @@ func genExampleFromTest(str, tfType string) (string, string) {
 		if tfNameRe.MatchString(line) {
 			foundTfType := tfNameRe.FindStringSubmatch(line)[1]
 			if tfType != foundTfType {
-				log.Info().Msgf("tf type %s not match %s", foundTfType, tfType)
+				logger.Logger.Warn().Msgf("tf type %s not match %s", foundTfType, tfType)
 				badTfType = true
 				continue
 			} else {
 				badTfType = false
 				tfName = tfNameRe.FindStringSubmatch(line)[2]
-				log.Info().Msgf("found tf name: %s", tfName)
+				logger.Logger.Info().Msgf("found tf name: %s", tfName)
 			}
 		}
 
 		// check for ref in definition
 		if definition.MatchString(line) {
-			log.Info().Msgf("found definition: %s", line)
+			logger.Logger.Debug().Msgf("found definition: %s", line)
 			doc += "\t" + definition.FindStringSubmatch(line)[1] + "\"your_value\"\n"
 			continue
 		}
 		// check for doc end
 		if endDoc.MatchString(line) {
-			log.Info().Msgf("found end doc: %s", line)
+			logger.Logger.Info().Msgf("found end doc: %s", line)
 			startFound = false
 			endFound = true
 			continue
@@ -96,7 +97,7 @@ func CreateExampleFile(fileName, exampleDir string) error {
 		return errors.New("doc is empty")
 	}
 
-	log.Info().Msgf("doc: %s", doc)
+	logger.Logger.Info().Msgf("doc: %s", doc)
 
 	doc = strings.TrimSpace(doc)
 

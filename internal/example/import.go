@@ -8,7 +8,8 @@ import (
 	"strings"
 
 	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
-	"github.com/rs/zerolog/log"
+
+	"github.com/FrangipaneTeam/tf-doc-extractor/internal/logger"
 )
 
 func genExampleFromResource(str string) (string, string) {
@@ -23,14 +24,14 @@ func genExampleFromResource(str string) (string, string) {
 		line := scanner.Text()
 
 		if importNameRe.MatchString(line) {
-			log.Info().Msgf("found import line : %s", line)
+			logger.Logger.Debug().Msgf("found import line : %s", line)
 			importName = importNameRe.FindStringSubmatch(line)[1]
 			break
 		}
 
 		if tfNameRe.MatchString(line) {
 			tfName = tfNameRe.FindStringSubmatch(line)[1]
-			log.Info().Msgf("found tf name: %s", tfName)
+			logger.Logger.Info().Msgf("found tf name: %s", tfName)
 			continue
 		}
 	}
@@ -45,7 +46,7 @@ func CreateImportExampleFile(fileName, exampleDir string) error {
 	}
 
 	importName, tfName := genExampleFromResource(f)
-	log.Info().Msgf("importName: %s", importName)
+	logger.Logger.Info().Msgf("importName: %s", importName)
 
 	exampleDirPath := exampleDir + "/resources/cloudavenue_" + tfName
 	errMkdir := os.MkdirAll(exampleDirPath, 0o755)
@@ -54,7 +55,7 @@ func CreateImportExampleFile(fileName, exampleDir string) error {
 	}
 
 	doc := fmt.Sprintf("# use the %s to import the resource\n", importName)
-	doc = doc + fmt.Sprintf("terraform import cloudavenue_%s.example %s", tfName, importName)
+	doc += fmt.Sprintf("terraform import cloudavenue_%s.example %s", tfName, importName)
 
 	errWrite := os.WriteFile(exampleDirPath+"/import.sh", []byte(doc), 0o644)
 	if errWrite != nil {
