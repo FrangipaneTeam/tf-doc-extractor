@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.3...v0.0.4) (2023-02-23)
+
+
+### Features
+
+* better log format ([1be6283](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/1be6283d11edcba6f781e9d2c5268f633ed23a8b))
+
 ## [0.0.3](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.2...v0.0.3) (2023-02-20)
 
 
