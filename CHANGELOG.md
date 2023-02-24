@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.4...v0.0.5) (2023-02-24)
+
+
+### Features
+
+* add categoryName in import ([34ab32b](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/34ab32b771ec03d6c594596330071f7be7fba62c))
+
 ## [0.0.4](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.3...v0.0.4) (2023-02-23)
 
 
