@@ -87,7 +87,7 @@ func CreateExampleFile(fileName, exampleDir string) error {
 		tfTest = "data"
 	}
 
-	f, err := file.FileToString(fileName)
+	f, err := file.ToString(fileName)
 	if err != nil {
 		return err
 	}
