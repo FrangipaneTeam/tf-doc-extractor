@@ -1,9 +1,9 @@
 module github.com/FrangipaneTeam/tf-doc-extractor
 
-go 1.19
+go 1.20
 
 require (
-	github.com/FrangipaneTeam/terraform-templates v0.0.2-0.20230217090640-9fe9570cb7c9
+	github.com/FrangipaneTeam/terraform-templates v0.0.2
 	github.com/rs/zerolog v1.29.0
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
 )

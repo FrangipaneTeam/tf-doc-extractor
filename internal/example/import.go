@@ -40,7 +40,7 @@ func genExampleFromResource(str string) (string, string) {
 }
 
 func CreateImportExampleFile(fileName, exampleDir string) error {
-	f, err := file.FileToString(fileName)
+	f, err := file.ToString(fileName)
 	if err != nil {
 		return err
 	}
