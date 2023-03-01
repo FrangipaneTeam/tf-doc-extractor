@@ -1,5 +1,5 @@
-github.com/FrangipaneTeam/terraform-templates v0.0.2 h1:JNoitNi4VwF+tfCJRlclJ5q+722vvTssG3rk6vNlziA=
-github.com/FrangipaneTeam/terraform-templates v0.0.2/go.mod h1:LLAFX4OccKjaf8FN0EhPfF2xboH+v/+4mAONA0kd+6U=
+github.com/FrangipaneTeam/terraform-templates v0.0.3 h1:UVlUmSSAtIa0+yHqWZDVNHp+uEAXebVWAjtXsh7VSx0=
+github.com/FrangipaneTeam/terraform-templates v0.0.3/go.mod h1:AoxGJM+IkXpBr5XFXoBAhZyKFkMBaRBiezn+FVSVj2M=
 github.com/coreos/go-systemd/v22 v22.3.3-0.20220203105225-a9a7ef127534/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
 github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
 github.com/google/go-cmp v0.5.2 h1:X2ev0eStA3AbceY54o37/0PQ/UWqKEiiO2dKL5OPaFM=
