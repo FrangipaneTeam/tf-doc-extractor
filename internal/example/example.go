@@ -41,9 +41,7 @@ func genExampleFromTest(str, tfType string) (string, string) {
 		// check for tf name
 		if tfNameRe.MatchString(line) {
 			foundTfType := tfNameRe.FindStringSubmatch(line)[1]
-			if tfType != foundTfType {
-				continue
-			} else {
+			if tfType == foundTfType {
 				tfName = tfNameRe.FindStringSubmatch(line)[2]
 				logger.Logger.Info().Msgf("found tf name: %s", tfName)
 			}
