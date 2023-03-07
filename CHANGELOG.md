@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.5...v0.0.6) (2023-03-07)
+
+
+### Features
+
+* use the full example definition in terraform acc test ([5c49b3a](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/5c49b3a8f6152bad7dcdbf5162da90dcd88f41e3))
+
 ## [0.0.5](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.4...v0.0.5) (2023-02-24)
 
 
