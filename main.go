@@ -6,8 +6,7 @@ import (
 	"strings"
 
 	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
-
-	"github.com/tcnksm/go-latest"
+	latest "github.com/tcnksm/go-latest"
 
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/example"
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/logger"
