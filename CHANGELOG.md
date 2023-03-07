@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.8](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.7...v0.0.8) (2023-03-07)
+
+
+### Bug Fixes
+
+* missing first line with datasource acc test examples ([fe1e99d](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/fe1e99dd758f52b968e97b426843eef8b4ddb17c))
+
 ## [0.0.7](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.6...v0.0.7) (2023-03-07)
 
 
