@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.7](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.6...v0.0.7) (2023-03-07)
+
+
+### Bug Fixes
+
+* missing tfName ([7150fc4](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/7150fc45e9085381a77ac7d03490134d8e799f0c))
+
 ## [0.0.6](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.5...v0.0.6) (2023-03-07)
 
 
