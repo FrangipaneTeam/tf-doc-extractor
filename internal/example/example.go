@@ -15,13 +15,12 @@ import (
 func genExampleFromTest(str, tfType string) (string, string) {
 	startDoc := regexp.MustCompile("const testAcc.*`")
 	endDoc := regexp.MustCompile("^`$")
-	// tfNameRe := regexp.MustCompile(`^(resource|data)\s+"(\S+)"\s+.*`)
+	tfNameRe := regexp.MustCompile(`^(resource|data)\s+"(\S+)"\s+.*`)
 	definition := regexp.MustCompile(`(\S+\s+=\s+)cloudavenue`)
 
 	doc := ""
 	startFound := false
 	endFound := false
-	badTfType := false
 	tfName := ""
 
 	scanner := bufio.NewScanner(strings.NewReader(str))
@@ -39,19 +38,16 @@ func genExampleFromTest(str, tfType string) (string, string) {
 			continue
 		}
 
-		// // check for tf name
-		// if tfNameRe.MatchString(line) {
-		// 	foundTfType := tfNameRe.FindStringSubmatch(line)[1]
-		// 	if tfType == "data-source" && tfType != foundTfType {
-		// 		logger.Logger.Warn().Msgf("tf type %s not match %s", foundTfType, tfType)
-		// 		badTfType = true
-		// 		continue
-		// 	} else {
-		// 		badTfType = false
-		// 		tfName = tfNameRe.FindStringSubmatch(line)[2]
-		// 		logger.Logger.Info().Msgf("found tf name: %s", tfName)
-		// 	}
-		// }
+		// check for tf name
+		if tfNameRe.MatchString(line) {
+			foundTfType := tfNameRe.FindStringSubmatch(line)[1]
+			if tfType != foundTfType {
+				continue
+			} else {
+				tfName = tfNameRe.FindStringSubmatch(line)[2]
+				logger.Logger.Info().Msgf("found tf name: %s", tfName)
+			}
+		}
 
 		// check for ref in definition
 		if definition.MatchString(line) {
@@ -66,7 +62,7 @@ func genExampleFromTest(str, tfType string) (string, string) {
 			endFound = true
 			continue
 		}
-		if startFound && !badTfType {
+		if startFound {
 			doc += line + "\n"
 		}
 	}
