@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.9](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.8...v0.0.9) (2023-03-08)
+
+
+### Bug Fixes
+
+* print new version only with parameter --version ([87505d9](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/87505d9c13f6f9eae9962b1cd6c66f08e7aaec3f))
+
 ## [0.0.8](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.7...v0.0.8) (2023-03-07)
 
 
