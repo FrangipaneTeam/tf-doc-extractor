@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.10](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.9...v0.0.10) (2023-03-08)
+
+
+### Features
+
+* add hcl formatter ([a4c2bc3](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/a4c2bc3ad3a8fbe6c9b96e7b691e8b012c08719e))
+
 ## [0.0.9](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.8...v0.0.9) (2023-03-08)
 
 
