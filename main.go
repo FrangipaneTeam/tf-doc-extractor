@@ -3,6 +3,7 @@ package main
 import (
 	_ "embed"
 	"flag"
+	"os"
 	"strings"
 
 	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
@@ -21,6 +22,7 @@ func main() {
 	fromTest := flag.Bool("test", false, "from test")
 	fromResource := flag.Bool("resource", false, "from resource")
 	debug := flag.Bool("debug", false, "sets log level to debug")
+	printVersion := flag.Bool("version", false, "prints version and exit")
 	flag.Parse()
 
 	version = strings.Trim(version, "\n")
@@ -28,6 +30,25 @@ func main() {
 	logger.Logger = logger.SetupZeroLog(version, *debug)
 
 	logger.Logger.Info().Msgf("tf-doc-extractor version %s", version)
+
+	if *printVersion {
+		// check version
+		githubTag := &latest.GithubTag{
+			Owner:      "FrangipaneTeam",
+			Repository: "tf-doc-extractor",
+		}
+
+		res, err := latest.Check(githubTag, version)
+		if err == nil {
+			if res.Outdated {
+				logger.Logger.Warn().Msgf("new version availaible : %s", res.Current)
+			}
+		} else {
+			logger.Logger.Warn().Err(err).Msg("failed to check version")
+		}
+
+		os.Exit(0)
+	}
 
 	if *fileName == "" {
 		logger.Logger.Fatal().Msg("filename is required")
@@ -43,21 +64,6 @@ func main() {
 
 	if *fromTest && *fromResource {
 		logger.Logger.Fatal().Msg("test and resource are exclusive")
-	}
-
-	// check version
-	githubTag := &latest.GithubTag{
-		Owner:      "FrangipaneTeam",
-		Repository: "tf-doc-extractor",
-	}
-
-	res, err := latest.Check(githubTag, version)
-	if err == nil {
-		if res.Outdated {
-			logger.Logger.Warn().Msgf("new version availaible : %s", res.Current)
-		}
-	} else {
-		logger.Logger.Warn().Err(err).Msg("failed to check version")
 	}
 
 	logger.Logger.Info().Msgf("using file %s", *fileName)
