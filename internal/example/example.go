@@ -7,8 +7,11 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclwrite"
 
+	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
+	"github.com/FrangipaneTeam/tf-doc-extractor/internal/format"
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/logger"
 )
 
@@ -65,7 +68,15 @@ func genExampleFromTest(str, tfType string) (string, string) {
 		}
 	}
 
-	return doc, tfName
+	f, err := hclwrite.ParseConfig([]byte(doc), "", hcl.Pos{Line: 1, Column: 1})
+	if err.HasErrors() {
+		logger.Logger.Error().Msg("error parsing doc with hclsyntax")
+		return "", ""
+	}
+
+	format.Body(f.Body(), nil)
+
+	return string(f.Bytes()), tfName
 }
 
 func CreateExampleFile(fileName, exampleDir string) error {
