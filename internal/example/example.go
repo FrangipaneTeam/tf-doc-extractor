@@ -19,7 +19,7 @@ func genExampleFromTest(str, tfType string) (string, string) {
 	startDoc := regexp.MustCompile("const testAcc.*`")
 	endDoc := regexp.MustCompile("^`$")
 	tfNameRe := regexp.MustCompile(`^(resource|data)\s+"(\S+)"\s+.*`)
-	definition := regexp.MustCompile(`(\S+\s+=\s+)cloudavenue`)
+	definition := regexp.MustCompile(`\S+\s+=\s+cloudavenue`)
 
 	doc := ""
 	startFound := false
@@ -53,7 +53,7 @@ func genExampleFromTest(str, tfType string) (string, string) {
 		// check for ref in definition
 		if definition.MatchString(line) {
 			logger.Logger.Debug().Msgf("found definition: %s", line)
-			doc += "\t" + definition.FindStringSubmatch(line)[1] + "\"your_value\"\n"
+			doc += "\t" + line + "\n"
 			continue
 		}
 		// check for doc end
