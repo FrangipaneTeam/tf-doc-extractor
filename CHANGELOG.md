@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.11](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.10...v0.0.11) (2023-03-10)
+
+
+### Bug Fixes
+
+* don't change terraform definition name ([062d2ce](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/062d2ce761a1197ad7aaa92466b26f5ed6dac64d))
+
 ## [0.0.10](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.9...v0.0.10) (2023-03-08)
 
 
