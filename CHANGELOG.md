@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.12](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.11...v0.0.12) (2023-04-04)
+
+
+### Bug Fixes
+
+* break the loop at the end of the constant ([3dd2c67](https://github.com/FrangipaneTeam/tf-doc-extractor/commit/3dd2c67f41d9aac58103f95366a3ff54c054b597))
+
 ## [0.0.11](https://github.com/FrangipaneTeam/tf-doc-extractor/compare/v0.0.10...v0.0.11) (2023-03-10)
 
 
