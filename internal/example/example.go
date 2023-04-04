@@ -61,7 +61,7 @@ func genExampleFromTest(str, tfType string) (string, string) {
 			logger.Logger.Info().Msgf("found end doc: %s", line)
 			startFound = false
 			endFound = true
-			continue
+			break
 		}
 		if startFound {
 			doc += line + "\n"
