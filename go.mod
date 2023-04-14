@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/FrangipaneTeam/terraform-templates v0.0.4
 	github.com/hashicorp/hcl/v2 v2.16.2
-	github.com/rs/zerolog v1.29.0
+	github.com/rs/zerolog v1.29.1
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
 )
 
