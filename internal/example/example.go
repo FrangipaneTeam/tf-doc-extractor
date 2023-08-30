@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclwrite"
 
 	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
+
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/format"
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/logger"
 )
@@ -59,8 +60,6 @@ func genExampleFromTest(str, tfType string) (string, string) {
 		// check for doc end
 		if endDoc.MatchString(line) {
 			logger.Logger.Info().Msgf("found end doc: %s", line)
-			startFound = false
-			endFound = true
 			break
 		}
 		if startFound {
@@ -107,14 +106,9 @@ func CreateExampleFile(fileName, exampleDir string) error {
 	doc = strings.TrimSpace(doc)
 
 	exampleDirPath := exampleDir + "/" + tfType + "s/" + tfName
-	errMkdir := os.MkdirAll(exampleDirPath, 0o755)
-	if errMkdir != nil {
-		return errMkdir
+	if err := os.MkdirAll(exampleDirPath, 0o755); err != nil {
+		return err
 	}
 
-	errWrite := os.WriteFile(exampleDirPath+"/"+tfType+".tf", []byte(doc), 0o644)
-	if errWrite != nil {
-		return errWrite
-	}
-	return nil
+	return os.WriteFile(exampleDirPath+"/"+tfType+".tf", []byte(doc), 0o644) //nolint:gosec
 }

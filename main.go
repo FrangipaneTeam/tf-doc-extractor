@@ -1,16 +1,18 @@
 package main
 
 import (
-	_ "embed"
 	"flag"
 	"os"
 	"strings"
 
-	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
 	latest "github.com/tcnksm/go-latest"
+
+	"github.com/FrangipaneTeam/terraform-templates/pkg/file"
 
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/example"
 	"github.com/FrangipaneTeam/tf-doc-extractor/internal/logger"
+
+	_ "embed"
 )
 
 //go:embed version.txt
@@ -41,7 +43,7 @@ func main() {
 		res, err := latest.Check(githubTag, version)
 		if err == nil {
 			if res.Outdated {
-				logger.Logger.Warn().Msgf("new version availaible : %s", res.Current)
+				logger.Logger.Warn().Msgf("new version available : %s", res.Current)
 			}
 		} else {
 			logger.Logger.Warn().Err(err).Msg("failed to check version")
