@@ -40,7 +40,6 @@ func genExampleFromResource(str string) (string, string) {
 }
 
 func getCategoryFromBase(resourceFile string) string {
-
 	categoryNameRe := regexp.MustCompile(`categoryName = "(\S+)"`)
 	categoryName := ""
 
@@ -93,9 +92,5 @@ func CreateImportExampleFile(fileName, exampleDir string) error {
 	doc := fmt.Sprintf("# use the %s to import the resource\n", importName)
 	doc += fmt.Sprintf("terraform import cloudavenue_%s_%s.example %s", categoryName, tfName, importName)
 
-	errWrite := os.WriteFile(exampleDirPath+"/import.sh", []byte(doc), 0o644)
-	if errWrite != nil {
-		return errWrite
-	}
-	return nil
+	return os.WriteFile(exampleDirPath+"/import.sh", []byte(doc), 0o644) //nolint:gosec
 }
