@@ -1,5 +1,5 @@
-github.com/FrangipaneTeam/terraform-templates v0.0.7 h1:DNc181vSRh1rocXe2EBkNjLPpbhw86UVW8/Zc7yeq5A=
-github.com/FrangipaneTeam/terraform-templates v0.0.7/go.mod h1:ihBV7YOAJDrhdaQu7U9JZIUewLfKX8MgWA4/QKihiNM=
+github.com/FrangipaneTeam/terraform-templates v0.0.8 h1:M5Dg8XFEXEiqah7AxNTcchl1WnuHC+V0VC9OqIZYTO4=
+github.com/FrangipaneTeam/terraform-templates v0.0.8/go.mod h1:ihBV7YOAJDrhdaQu7U9JZIUewLfKX8MgWA4/QKihiNM=
 github.com/agext/levenshtein v1.2.1 h1:QmvMAjj2aEICytGiWzmxoE0x2KZvE0fvmqMOfy2tjT8=
 github.com/agext/levenshtein v1.2.1/go.mod h1:JEDfjyjHDjOF/1e4FlBE/PkbqA9OfWu2ki2W0IB5558=
 github.com/apparentlymart/go-textseg/v13 v13.0.0 h1:Y+KvPE1NYz0xl601PVImeQfFyEy6iT90AvPUL1NNfNw=
